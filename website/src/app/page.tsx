@@ -7,6 +7,7 @@ import NextLink from 'next/link';
 import ProTip from '@/components/ProTip';
 import Copyright from '@/components/Copyright';
 
+
 export default function Home() {
   return (
     <Container maxWidth="lg">
@@ -31,3 +32,6 @@ export default function Home() {
     </Container>
   );
 }
+
+
+
