@@ -10,4 +10,28 @@ describe('Hero', () => {
  
     expect(heading).toBeInTheDocument()
   })
+
+  it('renders a subheading', () => {
+    render(<Hero />)
+    
+    const subheading = screen.getByRole('heading', { level: 2 })
+    
+    expect(subheading).toBeInTheDocument()
+  })
+
+  it('renders a button', () => {
+    render(<Hero />)
+    
+    const button = screen.getByRole('button')
+    
+    expect(button).toBeInTheDocument()
+  })
+
+  it('renders an image', () => {
+    render(<Hero />)
+    
+    const image = screen.getByRole('img')
+    
+    expect(image).toBeInTheDocument()
+  })
 })
