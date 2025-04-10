@@ -2,9 +2,9 @@ import '@testing-library/jest-dom'
 import { render, screen } from '@testing-library/react'
 import Hero from '@/components/Hero'
  
-// check for heading
+// check for heading (should succeed)
 describe('Hero', () => {
-  it('renders a heading', () => {
+  it('renders a heading', () => { 
     render(<Hero />)
  
     const heading = screen.getByRole('heading', { level: 1 })
@@ -12,7 +12,7 @@ describe('Hero', () => {
     expect(heading).toBeInTheDocument()
   })
 
-  // check for any subheading
+  // check for any subheading (should fail, the paragraph isnt a subheading)
   it('renders a subheading (h2, h3, or h4)', () => {
     render(<Hero />)
     
@@ -27,7 +27,7 @@ describe('Hero', () => {
     expect(subheadings.length).toBeGreaterThan(0)
   })
 
-  // check for button (Call to action)
+  // check for button (Call to action, should succeed)
   it('renders a button', () => {
     render(<Hero />)
     
@@ -36,7 +36,7 @@ describe('Hero', () => {
     expect(button).toBeInTheDocument()
   })
 
-  // check for image
+  // check for image (should fail)
   it('renders an image', () => {
     render(<Hero />)
     
