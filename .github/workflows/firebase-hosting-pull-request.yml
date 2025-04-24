@@ -10,8 +10,24 @@ permissions:
 jobs:
 
   # Test Vale
+  test_vale:
+    name: Vale Linting
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run Vale
+        run: |
+          vale --output=line docs/ src/
+        continue-on-error: true
 
   # Test Jest
+  test_jest:
+    name: Jest Unit Tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run tests
+        run: npm test
 
   # Test Run & Build
   build_and_preview:
