@@ -43,21 +43,20 @@ jobs:
         working-directory: ./website
         run: npm test
 
-  # Test Run & Build
-  build_and_preview:
-    if: ${{ github.event.pull_request.head.repo.full_name == github.repository }}
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - name: Install dependencies
-        working-directory: ./website
-        run: npm install
-      - name: Build with TypeScript errors ignored
-        working-directory: ./website
-        run: NEXT_TYPESCRIPT_COMPILE_ON_ERROR=true TSC_COMPILE_ON_ERROR=true npm run build || true
-      - uses: FirebaseExtended/action-hosting-deploy@v0
-        with:
-          repoToken: ${{ secrets.GITHUB_TOKEN }}
-          firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_CSC325CLASSPROJECTWEBSITE }}
-          projectId: csc325classprojectwebsite
-          entryPoint: ./website
+# Test Run & Build
+build_and_preview:
+  runs-on: ubuntu-latest
+  steps:
+    - uses: actions/checkout@v4
+    - name: Install dependencies
+      working-directory: ./website
+      run: npm install
+    - name: Build with TypeScript errors ignored
+      working-directory: ./website
+      run: NEXT_TYPESCRIPT_COMPILE_ON_ERROR=true TSC_COMPILE_ON_ERROR=true npm run build || true
+    - uses: FirebaseExtended/action-hosting-deploy@v0
+      with:
+        repoToken: ${{ secrets.GITHUB_TOKEN }}
+        firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_CSC325CLASSPROJECTWEBSITE }}
+        projectId: csc325classprojectwebsite
+        entryPoint: ./website
