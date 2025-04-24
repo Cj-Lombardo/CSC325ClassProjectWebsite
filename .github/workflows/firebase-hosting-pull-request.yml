@@ -27,6 +27,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Run tests
+        working-directory: ./website
         run: npm test
 
   # Test Run & Build
@@ -35,24 +36,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Debug directory structure
-        run: |
-          pwd
-          ls -la
-          # Check if package.json exists
-          if [ -f "package.json" ]; then
-            echo "package.json exists"
-          else
-            echo "package.json not found!"
-            # Try to find it
-            find . -name "package.json"
-          fi
-      - name: Install dependencies
-        run: npm ci || npm install
       - name: Build
+        working-directory: ./website
         run: npm run build
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: ${{ secrets.GITHUB_TOKEN }}
           firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_CSC325CLASSPROJECTWEBSITE }}
           projectId: csc325classprojectwebsite
+          entryPoint: ./website
