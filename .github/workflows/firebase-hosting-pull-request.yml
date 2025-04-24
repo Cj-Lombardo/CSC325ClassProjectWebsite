@@ -35,7 +35,22 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - run: npm run build
+      - name: Debug directory structure
+        run: |
+          pwd
+          ls -la
+          # Check if package.json exists
+          if [ -f "package.json" ]; then
+            echo "package.json exists"
+          else
+            echo "package.json not found!"
+            # Try to find it
+            find . -name "package.json"
+          fi
+      - name: Install dependencies
+        run: npm ci || npm install
+      - name: Build
+        run: npm run build
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: ${{ secrets.GITHUB_TOKEN }}
